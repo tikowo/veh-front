@@ -1,0 +1,115 @@
+$content-width: 69.375rem;
+
+$breakpoints: (
+  'tablet':  769px,
+  'desktop': 1024px,
+  'widescreen':  1216px
+);
+
+$size-1: 3rem;
+$size-2: 1rem;
+$size-3: 0.9375rem;
+$size-4: 0.875rem;
+$size-5: 0.75rem;
+
+$weight-1: 700;
+$weight-2: 600;
+$weight-3: 400;
+
+// Colors
+$white: #ffffff;
+$black: #303030;
+$grey: #9c9c9c;
+$greyish: #b2b2b2;
+$grey-light: #ecebe9;
+$grey-lighter: #f9f9f9;
+
+$toupe: #cfb995;
+$grapefruit: #ff5b5b;
+$pastel-orange: #ff915b;
+$cheese: #f3a536;
+$pale-orange: #ffbe5b;
+$light-gold: #ffdf5b;
+$kiwi-green: #8fe360;
+$tea: #68b680;
+$weird-green: #57e690;
+$tiffany-blue: #57dbe6;
+
+$transparent: transparent;
+
+$colors: (
+    black: $black,
+    greyish: $greyish,
+    grey: $grey,
+    grey-light: $grey-light,
+    grey-lighter: $grey-lighter,
+    white: $white,
+    toupe: $toupe,
+    grapefruit: $grapefruit,
+    pastel-orange: $pastel-orange,
+    cheese: $cheese,
+    pale-orange: $pale-orange,
+    light-gold: $light-gold,
+    kiwi-green: $kiwi-green,
+    weird-green: $weird-green,
+    tea: $tea,
+    tiffany-blue: $tiffany-blue,
+    transparent: $transparent
+);
+
+$sizes: (
+    1: $size-1,
+    2: $size-2,
+    3: $size-3,
+    4: $size-4,
+    5: $size-5
+);
+
+$weights: (
+    bold: $weight-1,
+    semibold: $weight-2,
+    normal: $weight-3
+);
+
+@mixin color-modifiers($attribute: 'color', $prefix: '-') {
+    @each $name, $hex in $colors {
+        &#{$prefix}#{$name} {
+            #{$attribute}: $hex;
+        }
+    }
+}
+
+@mixin size-modifiers($attribute: 'font-size', $prefix: '-') {
+    @each $name, $size in $sizes {
+        &#{$prefix}#{$name} {
+            #{$attribute}: $size
+        }
+    }
+}
+
+@mixin weight-modifiers($attribute: 'font-weight', $prefix: '-') {
+    @each $name, $weight in $weights {
+        &#{$prefix}#{$name} {
+            #{$attribute}: $weight
+        }
+    }
+}
+
+@mixin container {
+    margin: auto;
+    max-width: calc(#{$content-width} - 2rem);
+    padding: 0 1rem;
+}
+
+@mixin borderedContent {
+    border-radius: 4px;
+    background: $white;
+    border: 1px solid $grey-light;
+    padding: 1rem 1.5rem;
+}
+
+@mixin until($breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+        @content;
+    }
+}
