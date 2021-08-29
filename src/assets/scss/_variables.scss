@@ -97,7 +97,7 @@ $weights: (
 
 @mixin container {
     margin: auto;
-    max-width: calc(#{$content-width} - 2rem);
+    max-width: calc(#{$content-width} + 2rem);
     padding: 0 1rem;
 }
 
