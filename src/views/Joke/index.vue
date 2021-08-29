@@ -1,10 +1,13 @@
 <template>
   <div class="cj-joke">
-    <div class="cj-joke-container">
-      <item v-if="joke" :data="joke" />
-      <actions />
-    </div>
-    <div class="cj-joke-info">hi</div>
+    <template v-if="!$store.state.loading">
+      <div class="cj-joke-container">
+        <item v-if="joke" :data="joke" />
+        <actions />
+      </div>
+      <div class="cj-joke-info">hi</div>
+    </template>
+    <loader style="flex: 1" v-else />
   </div>
 </template>
 
@@ -16,7 +19,9 @@ export default {
   components: { Item, Actions },
   watch: {
     $route() {
-      this.$store.dispatch("fetchJoke", this.$route.params.id);
+      if(this.$route.params.id && this.$store.state.joke.id !== this.$route.params.id) {
+        this.fetchJoke()
+      }
     },
   },
   computed: {
@@ -25,9 +30,18 @@ export default {
     },
   },
   async mounted() {
-    const { id = null } = this.$route.params;
-    await this.$store.dispatch("fetchJoke", id);
+    if (this.$store.state.joke) return;
+    await this.fetchJoke();
     this.$store.dispatch("initJokes");
+  },
+  methods: {
+    async fetchJoke() {
+      const { id = null } = this.$route.params;
+
+      this.$store.commit("setLoading", true);
+      await this.$store.dispatch("fetchJoke", id);
+      this.$store.commit("setLoading", false);
+    },
   },
 };
 </script>

@@ -89,6 +89,8 @@ $navbar-height: 3.75rem;
     .cj-logo-contaier {
       > a {
         display: flex;
+        justify-content: center;
+        flex-direction: column;
         height: $navbar-height;
       }
     }

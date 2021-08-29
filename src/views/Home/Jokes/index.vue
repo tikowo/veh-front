@@ -6,6 +6,7 @@
         :key="joke.id"
         :text="joke.value"
         :id="joke.id"
+        @click="handleClick(joke)"
         :title="(category || getCategoryFromJoke(joke)) + ' joke'"
       />
     </div>
@@ -32,6 +33,10 @@ export default {
     getCategoryFromJoke(joke) {
       return joke.categories[0] || `Uncategorized`;
     },
+    handleClick(joke) {
+      this.$store.commit('setJoke', joke)
+      this.$router.push(`/joke/${joke.id}`)
+    }
   },
 };
 </script>
@@ -39,19 +44,24 @@ export default {
 <style lang="scss" scoped>
 .cj-home-joke-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 22.5rem);
+  grid-template-columns: repeat(var(--count), minmax(0, 1fr));
   justify-content: space-between;
   grid-gap: 15px;
+  --count: 1;
   ::v-deep {
     .cj-joke {
-      margin-bottom: 2.375rem;
+      margin-bottom: 1rem;
     }
   }
 
-  @include until("tablet") {
-    grid-template-columns: repeat(auto-fill, 100%);
+  @include from("mobile") {
+    --count: 2;
+  }
+
+  @include from("desktop") {
+    --count: 3;
     .cj-joke {
-      margin-bottom: 1rem;
+      margin-bottom: 2.375rem;
     }
   }
 }

@@ -1,8 +1,11 @@
 <template>
   <div class="home">
-    <joke-filters class="cj-home-joke-filters" />
-    <selected class="cj-home-filter-selected" />
-    <jokes />
+    <template v-if="!$store.state.loading">
+      <joke-filters class="cj-home-joke-filters" />
+      <selected class="cj-home-filter-selected" />
+      <jokes />
+    </template>
+    <loader class="cj-home-loader" v-else />
   </div>
 </template>
 
@@ -19,7 +22,9 @@ export default {
     Jokes,
   },
   async mounted() {
-    this.$store.dispatch("initJokes");
+    this.$store.commit("setLoading", true);
+    await this.$store.dispatch("initJokes");
+    this.$store.commit("setLoading", false);
   },
 };
 </script>
@@ -30,5 +35,8 @@ export default {
 }
 .cj-home-filter-selected {
   margin-bottom: 1.0625rem;
+}
+.cj-home-loader {
+  margin-bottom: 2rem;
 }
 </style>

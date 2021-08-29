@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    loading: false,
     jokes: [],
     total: 0,
     categories: [],
@@ -57,6 +58,8 @@ export default new Vuex.Store({
       });
     },
     jokeNextPrev(state, getters) {
+      if (!state.joke) return [null, null, -1];
+
       const index = getters.categorizedJokes.findIndex(joke => {
         return joke.id === state.joke.id
       })
@@ -64,6 +67,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setLoading(state, loading) {
+      state.loading = loading;
+    },
     setResult(state, { result, total }) {
       state.jokes = result;
       state.total = total;
@@ -84,19 +90,24 @@ export default new Vuex.Store({
   },
   actions: {
     async initJokes({ dispatch }) {
-      dispatch("fetchJokes");
-      dispatch("fetchCategories");
+      return Promise.all(
+        [
+          dispatch("fetchJokes"),
+          dispatch("fetchCategories")
+        ]
+      )
     },
     async fetchJokes({ commit }) {
       const data = await api.get("search/?query=all");
       commit("setResult", data);
+      commit("setPage", 1);
     },
     async fetchJoke({ commit }, id) {
-      const data = await api.get(id);
-      const category = data.categories[0] ?? null;
-
-      commit("setJoke", data)
-      commit("setCategory", { id: category, text: category });
+      return api.get(id).then(data => {
+        const category = data.categories[0] ?? null;
+        commit("setJoke", data)
+        commit("setCategory", { id: category, text: category });
+      })
     },
     async fetchCategories({ commit }) {
       const data = await api.get("categories");

@@ -13,12 +13,12 @@
     <div style="flex-grow: 1"></div>
 
     <div class="cj-joke-footer">
-      <router-link
-        :to="`/joke/${id}`"
+      <a
+        @click="handleClick(id)"
         class="cj-joke-footer-link font-weight-semibold"
       >
         See stats <img src="@/assets/svg/arrow-right.svg"
-      /></router-link>
+      /></a>
     </div>
   </div>
 </template>
@@ -39,19 +39,24 @@ export default {
       required: true,
     },
   },
+  methods: {
+    handleClick(id) {
+      this.$emit('click', id);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .cj-joke {
-  @include until('tablet') {
+  @include until("tablet") {
     width: 100%;
   }
   flex-direction: column;
   display: flex;
   padding: 1rem;
   border: 1px solid $grey-light;
-  width: 22.5rem;
+  // width: 22.5rem;
   transition: 0.3s ease;
   &:hover {
     box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.15);

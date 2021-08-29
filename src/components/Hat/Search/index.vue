@@ -13,7 +13,7 @@
       <div class="cj-search-results" v-if="data && data.length">
         <div v-for="joke in data.slice(0, 10)" :key="joke.id">
           <img src="@/assets/svg/lightning.svg" alt="lightning" />
-          <a @click="handleClick(joke.id)">
+          <a @click="handleClick(joke)">
             <span class="cj-uppercase"> {{ getJokeCat(joke) }}: </span>
             {{ joke.value }}
           </a>
@@ -25,19 +25,16 @@
 
 <script>
 import DropDown from "@/components/DropDown";
+import debounce from "@/helpers/debounce";
+
 export default {
   components: { DropDown },
   watch: {
     async search() {
-      if (!this.search) this.data = null;
-      if (this.search.length < 3) return;
-      const { result = null } = await this.$api.get(
-        `search/?query=${this.search}`
-      );
-      this.data = result;
+      this.debounceSearch();
     },
     $route() {
-      this.active = false;
+      // this.active = false;
     },
   },
   data() {
@@ -47,15 +44,33 @@ export default {
       data: null,
     };
   },
+  mounted() {
+    this.debounceSearch = debounce(async () => {
+      if (!this.search) this.data = null;
+      if (this.search.length < 3) return;
+
+      const data = await this.$api.get(`search/?query=${this.search}`);
+      this.data = data.result;
+
+      if (data.result.length === 1) {
+        this.$store.commit("setJoke", data.result[0]);
+        this.$router.push(`/joke/${data.result[0].id}`);
+        this.$store.commit("setResult", data);
+        return;
+      }
+      this.$store.commit("setResult", data);
+    });
+  },
   methods: {
     getJokeCat(joke) {
       if (!joke.categories.length) return "uncategorized";
       return joke.categories[0];
     },
-    handleClick(id) {
+    handleClick(joke) {
       this.active = false;
-      this.$router.push(`/joke/${id}`); 
-    }
+      this.$store.commit("setJoke", joke);
+      this.$router.push(`/joke/${joke.id}`);
+    },
   },
 };
 </script>
