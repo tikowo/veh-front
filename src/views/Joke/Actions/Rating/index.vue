@@ -9,7 +9,7 @@
       }}</span>
     </div>
     <div>
-      <span class="cj-circle background-grapefruit">
+      <span class="cj-circle background-lightish-red">
         <img src="@/assets/svg/downvote.svg" alt="upvote" />
       </span>
       <span class="text-grapefruit size-5 font-weight-semibold">{{
@@ -52,6 +52,18 @@ export default {
     align-items: center;
     .cj-circle {
       margin-bottom: 0.5rem;
+
+      &.background-lightish-red {
+        &:hover {
+          background: $faded-red;
+        }
+      }
+
+      &.background-tea {
+        &:hover {
+          background: $forest-green;
+        }
+      }
     }
     &:not(:last-child) {
       margin-right: 1.875rem;

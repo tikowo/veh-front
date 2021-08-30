@@ -49,10 +49,10 @@ export default {
   },
   mounted() {
     this.debounceSearch = debounce(async () => {
-      if (!this.search) this.data = null;
-      if (this.search.length < 3) return;
+      // if (!this.search) this.data = null;
+      if (this.search.length < 3 && this.search) return;
 
-      const data = await this.$api.get(`search/?query=${this.search}`);
+      const data = await this.$api.get(`search/?query=${this.search || "all"}`);
       this.data = data.result;
 
       if (data.result.length === 1) {
@@ -62,6 +62,7 @@ export default {
         return;
       }
       this.$store.commit("setResult", data);
+      (this.$route.fullPath !== '/') && this.$router.push("/");
     });
   },
   methods: {

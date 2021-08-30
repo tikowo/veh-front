@@ -19,9 +19,9 @@ export default {
   computed: {
     trend() {
       if (this.joke.downvote > this.joke.upvote) return ["Chestnut", "#000"];
-      if (this.joke.upvote < 51) return ["New in town", "#57dbe6"];
+      if (this.joke.upvote < 51) return ["New in town", "#36aef3"];
       if (this.joke.upvote < 101) return ["Trending", "#f3a536"];
-      return ["Hall of fame", "#68b680"];
+      return ["Hall of fame", "#f33636"];
     },
   },
 };

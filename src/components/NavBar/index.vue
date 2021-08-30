@@ -134,7 +134,7 @@ $navbar-height: 3.75rem;
           margin-right: 2.125rem;
           margin-left: 0.5rem;
         }
-        >img {
+        > img {
           width: 1rem;
         }
         padding: 1.25rem 1rem;

@@ -22,9 +22,12 @@ export default {
     Jokes,
   },
   async mounted() {
-    this.$store.commit("setLoading", true);
-    await this.$store.dispatch("initJokes");
-    this.$store.commit("setLoading", false);
+    this.$store.commit("setCategory", "");
+    if (!this.$store.state.jokes.length) {
+      this.$store.commit("setLoading", true);
+      await this.$store.dispatch("initJokes");
+      this.$store.commit("setLoading", false);
+    }
   },
 };
 </script>

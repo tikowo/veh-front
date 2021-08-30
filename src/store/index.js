@@ -17,7 +17,7 @@ export default new Vuex.Store({
   },
   getters: {
     categorizedJokes(state) {
-      if (state.category) {
+      if (state.category && state.category.id) {
         return state.jokes.filter((joke) => {
           return joke.categories.includes(state.category.id);
         });

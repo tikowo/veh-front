@@ -33,7 +33,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 2px;
-  transition: .1s ease;
+  transition: 0.1s ease;
   &:hover {
     opacity: 0.9;
     box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.25);
