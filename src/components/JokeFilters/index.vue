@@ -47,13 +47,13 @@ export default {
   display: grid;
   grid-template-columns: repeat(var(--count), minmax(0, 1fr));
   grid-gap: 20px;
-  @include from('tablet') {
+  @include from("tablet") {
     --count: 3;
   }
-  @include from('desktop') {
+  @include from("desktop") {
     --count: 4;
   }
-  @include from('widescreen') {
+  @include from("widescreen") {
     --count: 5;
   }
 }

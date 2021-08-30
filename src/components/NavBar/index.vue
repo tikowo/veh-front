@@ -58,7 +58,7 @@
         </drop-down>
       </div>
       <a class="cj-nav-burger" @click="sidebarOpen = true">
-        <img src="@/assets/svg/hamburger.svg"/>
+        <img src="@/assets/svg/hamburger.svg" />
       </a>
       <sidebar v-model="sidebarOpen" />
     </div>
@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       dropdownActive: false,
-      sidebarOpen: false
+      sidebarOpen: false,
     };
   },
   methods: {
@@ -126,9 +126,8 @@ $navbar-height: 3.75rem;
     }
   }
 
-
   .cj-nav-burger {
-    @include from('tablet') {
+    @include from("tablet") {
       display: none;
     }
   }

@@ -51,7 +51,7 @@ export default {
   grid-gap: 15px;
   --count: 1;
 
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
   @include from("mobile") {
     --count: 2;
   }
