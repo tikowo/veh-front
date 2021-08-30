@@ -26,4 +26,7 @@ export default {
     margin-bottom: 3.75rem;
   }
 }
+.container {
+  flex: 1;
+}
 </style>
