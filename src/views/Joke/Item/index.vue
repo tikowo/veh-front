@@ -3,7 +3,7 @@
     <div class="cj-joke-item-header">
       <div class="cj-joke-item-info">
         <joke-filter-item small theme="weird-green" :title="jokeCategory" />
-        <span class="text-cheese size-4 font-weight-semibold">TRENDING</span>
+        <trend :joke="joke" />
       </div>
       <div class="cj-joke-header-container">
         <h1 class="size-1 font-weight-semibold text-toupe">
@@ -26,9 +26,10 @@
 
 <script>
 import JokeFilterItem from "@/components/JokeFilters/Item.vue";
+import Trend from "./Trend";
 import { mapGetters } from "vuex";
 export default {
-  components: { JokeFilterItem },
+  components: { JokeFilterItem, Trend },
   props: {
     data: {
       type: Object,
@@ -39,6 +40,9 @@ export default {
     ...mapGetters(["jokeNextPrev"]),
     jokeCategory() {
       return this.data.categories[0];
+    },
+    joke() {
+      return this.$store.state.joke;
     },
   },
 };
@@ -74,6 +78,12 @@ export default {
   @include until("tablet") {
     h1 {
       font-size: 1.2rem;
+    }
+  }
+
+  @include until("desktop") {
+    h1 {
+      font-size: 2rem;
     }
   }
 }

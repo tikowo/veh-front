@@ -1,0 +1,13 @@
+# Plan
+- Setup vue app with vuex and vue router
+- Add scss, setup scss variables create mixins
+- Create the base app layout ( Header Content Footer )
+- Create base ui components
+- Fetch jokes from api and display on the main page
+- Create Single Joke Page
+- Implement search
+- Implement Next Joke Prev joke
+- Make app responsive
+- Make Mobile app header
+- Rewrite css to mobile first
+- Host somewhere

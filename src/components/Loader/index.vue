@@ -15,8 +15,8 @@ export default {};
 
 <style lang="scss" scoped>
 .cj-loader {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .lds-ellipsis {
   display: inline-block;

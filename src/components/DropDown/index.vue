@@ -53,9 +53,9 @@ export default {
     overflow-x: hidden;
   }
   &.paddingless {
-      .cj-dropdown-content {
-          padding: 0;
-      }
+    .cj-dropdown-content {
+      padding: 0;
+    }
   }
 }
 

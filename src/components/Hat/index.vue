@@ -32,7 +32,7 @@ export default {
 
   > h1 {
     text-align: center;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
   > p {
     font-weight: $weight-2;
@@ -41,7 +41,7 @@ export default {
     max-width: 28.75rem;
     margin-top: 2.8125rem;
 
-    @include until('tablet') {
+    @include until("tablet") {
       padding: 0 1rem;
     }
   }

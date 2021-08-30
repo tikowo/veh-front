@@ -13,7 +13,7 @@ export default new Vuex.Store({
     currentPage: 1,
     perPage: 6,
     category: "",
-    joke: null
+    joke: null,
   },
   getters: {
     categorizedJokes(state) {
@@ -60,11 +60,15 @@ export default new Vuex.Store({
     jokeNextPrev(state, getters) {
       if (!state.joke) return [null, null, -1];
 
-      const index = getters.categorizedJokes.findIndex(joke => {
-        return joke.id === state.joke.id
-      })
-      return [getters.categorizedJokes[index - 1]?.id, getters.categorizedJokes[index + 1]?.id, index];
-    }
+      const index = getters.categorizedJokes.findIndex((joke) => {
+        return joke.id === state.joke.id;
+      });
+      return [
+        getters.categorizedJokes[index - 1]?.id,
+        getters.categorizedJokes[index + 1]?.id,
+        index,
+      ];
+    },
   },
   mutations: {
     setLoading(state, loading) {
@@ -85,17 +89,18 @@ export default new Vuex.Store({
       state.currentPage = page;
     },
     setJoke(state, joke) {
-      state.joke = joke;
-    }
+      const data = {
+        ...joke,
+        upvote: Math.floor(Math.random() * 300),
+        downvote: Math.floor(Math.random() * 100),
+      };
+
+      state.joke = data;
+    },
   },
   actions: {
     async initJokes({ dispatch }) {
-      return Promise.all(
-        [
-          dispatch("fetchJokes"),
-          dispatch("fetchCategories")
-        ]
-      )
+      return Promise.all([dispatch("fetchJokes"), dispatch("fetchCategories")]);
     },
     async fetchJokes({ commit }) {
       const data = await api.get("search/?query=all");
@@ -103,11 +108,11 @@ export default new Vuex.Store({
       commit("setPage", 1);
     },
     async fetchJoke({ commit }, id) {
-      return api.get(id).then(data => {
+      return api.get(id).then((data) => {
         const category = data.categories[0] ?? null;
-        commit("setJoke", data)
+        commit("setJoke", data);
         commit("setCategory", { id: category, text: category });
-      })
+      });
     },
     async fetchCategories({ commit }) {
       const data = await api.get("categories");

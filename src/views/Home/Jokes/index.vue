@@ -1,6 +1,6 @@
 <template>
   <div class="cj-home-jokes">
-    <div class="cj-home-joke-container">
+    <div class="cj-home-joke-container" v-if="paginatedJokes.length">
       <joke
         v-for="joke in paginatedJokes"
         :key="joke.id"
@@ -9,6 +9,9 @@
         @click="handleClick(joke)"
         :title="(category || getCategoryFromJoke(joke)) + ' joke'"
       />
+    </div>
+    <div class="cj-home-empty-jokes" v-else>
+      <p>No jokes under this category</p>
     </div>
     <more @click="showMore" v-if="moreLeft" />
   </div>
@@ -34,9 +37,9 @@ export default {
       return joke.categories[0] || `Uncategorized`;
     },
     handleClick(joke) {
-      this.$store.commit('setJoke', joke)
-      this.$router.push(`/joke/${joke.id}`)
-    }
+      this.$store.commit("setJoke", joke);
+      this.$router.push(`/joke/${joke.id}`);
+    },
   },
 };
 </script>
@@ -45,15 +48,10 @@ export default {
 .cj-home-joke-container {
   display: grid;
   grid-template-columns: repeat(var(--count), minmax(0, 1fr));
-  justify-content: space-between;
   grid-gap: 15px;
   --count: 1;
-  ::v-deep {
-    .cj-joke {
-      margin-bottom: 1rem;
-    }
-  }
 
+    margin-bottom: 1rem;
   @include from("mobile") {
     --count: 2;
   }
@@ -64,5 +62,11 @@ export default {
       margin-bottom: 2.375rem;
     }
   }
+}
+
+.cj-home-empty-jokes {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
 }
 </style>

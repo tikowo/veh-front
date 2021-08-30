@@ -1,5 +1,5 @@
 <template>
-  <div class="cj-footer">
+  <footer class="cj-footer">
     <div class="container">
       <div>
         <p class="text-white font-weight-semibold">
@@ -8,7 +8,7 @@
         <a class="font-weight-semibold size-4">SUBMIT JOKE</a>
       </div>
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>

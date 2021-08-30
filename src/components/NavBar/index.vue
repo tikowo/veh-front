@@ -1,5 +1,5 @@
 <template>
-  <div class="cj-nav background-black text-white" id="nav">
+  <nav class="cj-nav background-black text-white" id="nav">
     <div class="container">
       <div class="cj-logo-contaier">
         <router-link to="/">
@@ -57,17 +57,23 @@
           </ul>
         </drop-down>
       </div>
+      <a class="cj-nav-burger" @click="sidebarOpen = true">
+        <img src="@/assets/svg/hamburger.svg"/>
+      </a>
+      <sidebar v-model="sidebarOpen" />
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
 import DropDown from "@/components/DropDown";
+import Sidebar from "./Sidebar";
 export default {
-  components: { DropDown },
+  components: { DropDown, Sidebar },
   data() {
     return {
       dropdownActive: false,
+      sidebarOpen: false
     };
   },
   methods: {
@@ -103,7 +109,10 @@ $navbar-height: 3.75rem;
         display: inline-block;
 
         &:not(:last-child) {
-          margin-right: 4rem;
+          margin-right: 2rem;
+          @include from("desktop") {
+            margin-right: 4rem;
+          }
         }
       }
 
@@ -114,6 +123,13 @@ $navbar-height: 3.75rem;
         }
         padding: 1.25rem 1rem;
       }
+    }
+  }
+
+
+  .cj-nav-burger {
+    @include from('tablet') {
+      display: none;
     }
   }
 }

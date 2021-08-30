@@ -14,7 +14,8 @@ export default {};
 .cj-more {
   display: flex;
   justify-content: center;
-  margin-bottom: 3.625rem;
+  margin-top: 1.625rem;
+  margin-bottom: 1.625rem;
   .cj-viewmore {
     padding: 0.875rem 1rem;
     border: 1px solid #cfb995;
@@ -22,6 +23,10 @@ export default {};
     > img {
       margin-left: 0.5rem;
     }
+  }
+  @include from("tablet") {
+    margin-top: 0;
+    margin-bottom: 3.625rem;
   }
 }
 </style>

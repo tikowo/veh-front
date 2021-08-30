@@ -42,25 +42,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .cj-filters {
-//   display: flex;
-//   flex-flow: row wrap;
-//   justify-content: space-between;
-//   &::after {
-//     content: "";
-//     flex: auto;
-//   }
-//   ::v-deep {
-//     .cj-filter-item {
-//         margin-bottom: 1.25rem;
-//         margin-right: 1rem;
-//     //   margin-right: 1.25rem;
-//     }
-//   }
-// }
 .cj-filters {
+  --count: 2;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 12.875rem);
+  grid-template-columns: repeat(var(--count), minmax(0, 1fr));
   grid-gap: 20px;
+  @include from('tablet') {
+    --count: 3;
+  }
+  @include from('desktop') {
+    --count: 4;
+  }
+  @include from('widescreen') {
+    --count: 5;
+  }
 }
 </style>

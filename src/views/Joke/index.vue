@@ -1,11 +1,19 @@
 <template>
   <div class="cj-joke">
     <template v-if="!$store.state.loading">
-      <div class="cj-joke-container">
-        <item v-if="joke" :data="joke" />
+      <div v-if="joke" class="cj-joke-container">
+        <item :data="joke" />
         <actions />
       </div>
-      <div class="cj-joke-info">hi</div>
+      <div class="cj-joke-info">
+        <h4 class="font-weight-semibold">The TOP 10 JOKES THIS WEEK</h4>
+        <router-link to="/" class="size-3">Smoking Joke</router-link>
+        <router-link to="/" class="size-3">My Boss Joke</router-link>
+        <router-link to="/" class="size-3">Dirty Millionaire Joke</router-link>
+        <router-link to="/" class="size-3">The annoying neighbour</router-link>
+        <router-link to="/" class="size-3">Knock Knock</router-link>
+        <router-link to="/" class="size-3">Why Tyson lisps</router-link>
+      </div>
     </template>
     <loader style="flex: 1" v-else />
   </div>
@@ -19,8 +27,11 @@ export default {
   components: { Item, Actions },
   watch: {
     $route() {
-      if(this.$route.params.id && this.$store.state.joke.id !== this.$route.params.id) {
-        this.fetchJoke()
+      if (
+        this.$route.params.id &&
+        this.$store.state.joke.id !== this.$route.params.id
+      ) {
+        this.fetchJoke();
       }
     },
   },
@@ -60,9 +71,26 @@ export default {
   }
   .cj-joke-info {
     @include borderedContent;
+    padding-top: 2rem;
     margin-left: 0.9375rem;
     width: 350px;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    > h4 {
+      margin-bottom: 1rem;
+    }
+    > a {
+      color: $black;
+      text-decoration: underline;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  @include until("desktop") {
+    .cj-joke-info {
+      width: 250px;
+    }
   }
 
   @include until("tablet") {

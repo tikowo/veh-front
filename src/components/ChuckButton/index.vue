@@ -5,7 +5,7 @@
     :class="{
       'cj-icon-right': svg && !iconLeft,
       'cj-icon-left': svg && iconLeft,
-      narrow
+      narrow,
     }"
   >
     <slot></slot>
@@ -80,8 +80,8 @@ export default {
     },
     narrow: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 };
 </script>
