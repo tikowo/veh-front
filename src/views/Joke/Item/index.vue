@@ -75,15 +75,14 @@ export default {
     }
   }
 
-  @include until("tablet") {
-    h1 {
-      font-size: 1.2rem;
-    }
-  }
-
   @include until("desktop") {
     h1 {
       font-size: 2rem;
+    }
+  }
+  @include until("tablet") {
+    h1 {
+      font-size: 1.2rem;
     }
   }
 }

@@ -21,6 +21,9 @@ export default {
 
 <style lang="scss" scoped>
 .cj-default-hat {
-  margin-bottom: 3.75rem;
+  margin-bottom: 1.75rem;
+  @include from("tablet") {
+    margin-bottom: 3.75rem;
+  }
 }
 </style>

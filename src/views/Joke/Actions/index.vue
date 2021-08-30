@@ -57,6 +57,7 @@ export default {
   align-items: flex-end;
   flex-wrap: wrap;
   @include until("tablet") {
+    padding: 0;
     flex-direction: column;
     .cj-buttons-container {
       align-self: center;
