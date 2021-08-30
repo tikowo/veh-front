@@ -10,7 +10,7 @@
     <chuck-button
       :svg="more ? 'arrow-up' : 'arrow-down'"
       @click="more = !more"
-      >{{ more ? "Show Less" : "VIEW ALL" }}</chuck-button
+      >{{ more ? "SHOW LESS" : "VIEW ALL" }}</chuck-button
     >
   </div>
 </template>

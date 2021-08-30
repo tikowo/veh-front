@@ -59,6 +59,10 @@ input {
     width: 100%;
     border: 1px solid $grey-light;
     border-radius: 4px;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 button {
@@ -71,4 +75,11 @@ button {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+
+
+.cj-flex-center {
+    display: flex;
+    align-items: center;
 }

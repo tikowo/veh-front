@@ -2,13 +2,16 @@
   <div class="cj-search">
     <drop-down paddingless v-model="active">
       <template #trigger>
-        <input
-          v-model="search"
-          @focus="active = true"
-          @blur="active = true"
-          class="text-white size-3"
-          placeholder="How can we make you laugh today?"
-        />
+        <div class="cj-search-input-container" :class="{ 'cj-active': search }">
+          <input
+            v-model="search"
+            @focus="active = true"
+            @blur="active = true"
+            class="text-white size-3"
+            placeholder="How can we make you laugh today?"
+          />
+          <img class="cj-icon" src="@/assets/svg/magnify.svg" />
+        </div>
       </template>
       <div class="cj-search-results" v-if="data && data.length">
         <div v-for="joke in data.slice(0, 10)" :key="joke.id">
@@ -77,6 +80,17 @@ export default {
 <style lang="scss" scoped>
 .cj-search {
   width: 100%;
+
+  .cj-search-input-container {
+    position: relative;
+
+    .cj-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
   .cj-search-results {
     padding: 0.5rem 1rem;
 
@@ -103,11 +117,23 @@ export default {
     }
   }
   input {
-    padding: 0.75rem 1rem;
+    padding: 0.907rem 1rem;
     background: transparent;
-
     &::placeholder {
       color: $greyish;
+    }
+  }
+
+  .cj-search-input-container {
+    &.cj-active {
+      > input {
+        background: $white;
+        color: $black;
+      }
+
+      > img {
+        filter: invert(75%);
+      }
     }
   }
 }

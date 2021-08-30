@@ -8,13 +8,23 @@
       </div>
       <div class="cj-nav-list">
         <router-link
-          class="cj-nav-item size-3 font-weight-semibold text-white"
+          class="
+            cj-nav-item cj-flex-center
+            size-3
+            font-weight-semibold
+            text-white
+          "
           to="/"
         >
           SO FUNKTIONIERT’S
         </router-link>
         <router-link
-          class="cj-nav-item size-3 font-weight-semibold text-white"
+          class="
+            cj-nav-item cj-flex-center
+            size-3
+            font-weight-semibold
+            text-white
+          "
           to="/"
         >
           SONDERANGEBOTE</router-link
@@ -29,14 +39,14 @@
             <button
               @click="handleClick"
               class="
+                cj-dropdown-item cj-flex-center
                 size-3
-                cj-dropdown-item
                 font-weight-semibold
                 text-white
                 background-toupe
               "
             >
-              <img src="@/assets/svg/user.svg" alt="chevron-right" />
+              <img src="@/assets/svg/user.svg" alt="user-icon" />
               <span>MEIN BEREICH</span>
               <img src="@/assets/svg/triangle-down.svg" alt="chevron-right" />
             </button>
@@ -101,17 +111,20 @@ $navbar-height: 3.75rem;
       }
     }
     .cj-nav-list {
+      height: $navbar-height;
+      display: flex;
       @include until("tablet") {
         display: none;
       }
       .cj-nav-item {
-        padding: 1.25rem 0;
-        display: inline-block;
-
+        padding: 0 1rem;
+        &:hover {
+          background: #8a82821a;
+        }
         &:not(:last-child) {
-          margin-right: 2rem;
+          margin-right: 1rem;
           @include from("desktop") {
-            margin-right: 4rem;
+            margin-right: 2.5rem;
           }
         }
       }
@@ -120,6 +133,9 @@ $navbar-height: 3.75rem;
         > span {
           margin-right: 2.125rem;
           margin-left: 0.5rem;
+        }
+        >img {
+          width: 1rem;
         }
         padding: 1.25rem 1rem;
       }
